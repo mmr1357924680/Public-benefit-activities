@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mengxuegu.springboot.mapper.ActivityMapper">
+    <select id="getActivityByPage" resultType="com.mengxuegu.springboot.entities.Activity">
+        <!--分页时运算处理-->
+        <bind name="offset" value="(entity.page-1)*entity.rows"/>
+        SELECT * FROM activity
+        limit #{offset},#{entity.rows}
+    </select>
+    <select id="getActivityById" resultType="com.mengxuegu.springboot.entities.Activity">
+        select * from `activity` where id=#{id}
+    </select>
+
+    <insert id="addActivity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `activity`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name !=null and name !=''">
+                name,
+            </if>
+            <if test="content !=null and content !=''">
+                content,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name !=null and name !=''">
+                #{name},
+            </if>
+            <if test="content !=null and content !=''">
+                #{content},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateActivity">
+        UPDATE `activity`
+        SET
+        <trim suffixOverrides=",">
+            <if test="name !=null and name !=''">
+                name = #{name},
+            </if>
+            <if test="content !=null and content !=''">
+                content = #{content},
+            </if>
+            <if test="state !=null and state !=''">
+                state = #{state}
+            </if>
+        </trim>
+        WHERE `id`=#{id}
+    </update>
+
+    <delete id="deleteActivityById">
+        delete from `activity` where id = #{id}
+    </delete>
+    <insert id="addCreateRelation" parameterType="com.mengxuegu.springboot.entities.CreateActivity">
+        INSERT INTO create_activity(uid,aid) VALUES (#{uid},#{aid})
+    </insert>
+    <select id="getUserIdByActId" resultType="int">
+        SELECT uid FROM create_activity WHERE aid = #{id}
+    </select>
+    <insert id="addJoinRelation" parameterType="com.mengxuegu.springboot.entities.JoinActivity">
+        INSERT INTO join_activity(uid,aid) VALUES (#{uid},#{aid})
+    </insert>
+<!--    <select id="getNamesByCreateIds" resultType="string">
+        SELECT name FROM activity WHERE id in
+        <foreach collection="list" item="id" separator="," index="index" open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="getNamesByJoiniIds" resultType="string">
+        SELECT name FROM activity WHERE id in
+        <foreach collection="list" item="id" index="index" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>-->
+</mapper>

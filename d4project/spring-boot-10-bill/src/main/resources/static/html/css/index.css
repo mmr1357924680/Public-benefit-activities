@@ -1,0 +1,239 @@
+@charset "utf-8";
+body{
+	padding: 0px;
+	margin: 0px;
+
+}
+ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.header{
+	height: 550px;
+	width: 100%;
+}
+.banner{
+	height:100%;
+	background: url(../img/banner2.jpg) no-repeat center center;
+	background-size:cover;
+	
+} 
+.nav{
+	position: absolute;
+	height: 55px;
+	width: 100%;
+	background-color: rgba(0,0,0,0.5);
+}
+.nav ul li{
+	float: left;
+	height: 55px;
+	width: 120px;
+	text-align: center;
+	line-height: 55px;
+}
+.nav ul:after{
+	content: "";
+	display: block;
+	clear: both;
+	width: 0;
+}
+.nav ul li a{
+	color: #FFF;
+	font-size: 16px;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	
+	
+}
+.nav ul li a:hover{
+	background-color: red;
+}
+.title .main{
+	font-size: 20px;
+	color: #FF0000;
+	text-align: center;
+	margin-top: 40px;
+}
+.title .sub{
+	margin-top: 5px;
+	color: black;
+	font-size: 15px;
+	text-align: center;
+	
+}
+
+.floor1 .photo{
+	margin-top: 35px;
+	
+}
+
+.floor2{
+		background-color: bisque;
+	}
+.floor2 .photo{
+	margin-top: 35px;
+}
+.floor2 .photo >div{
+	float: left;
+}
+.floor2 .photo:after{
+	content: "";
+	display: block;
+	clear: both;
+	width: 0;
+	}
+	.floor2 .photo a{
+		font-size: 16px;
+		color: #FF0000;
+	}
+	.floor2 .photo .left{
+		margin-right: 25px;
+	}
+	.floor2 .photo .mid{
+		margin-right:25px ;
+	}
+	.floor2 .photo .r1{
+		margin-right: 25px;
+	}
+	.floor2 .photo .r2{
+		margin-right: 25px;
+	}
+	
+	.floor2 .photo .up{
+		margin-bottom: 25px;
+	}
+	.floor2 .photo .m1{
+		margin-bottom: 25px;
+	}
+	.floor2 .photo .m2{
+		margin-bottom: 25px;
+	}
+	.floor2 .photo .m3{
+		margin-bottom: 25px;
+	}
+	.floor3{
+		background-color: bisque;
+	}
+	.floor3 .pa{
+		margin-top: 30px;
+		display: inline-block;
+	}
+	.floor3 .pa p{
+		font-size: 40px;
+		color: coral;
+		text-align: left;
+	}
+	.photo1 img{
+		margin-top: 30px;
+		height: 300px;
+		width: 1350px;
+		
+	}
+	.photo2 img{
+		margin-top: 30px;
+		height: 300px;
+		width: 1350px;
+	}
+	.gphoto img{
+		margin-top: 30px;
+	}
+	.back a{
+		margin-top: 30px;
+	}
+	.back a:link{
+		color: #333;
+		font-size: 40px;
+		text-decoration: none;
+	}
+	.back a:visited{
+		color: #FF7F50;
+	}
+	.back a:hover{
+		color: #FF0000;
+		text-decoration: underline;
+	}
+	.back a:active{
+		color: chartreuse;
+		text-decoration: underline;
+	}
+	.qcphoto{
+		margin-top: 30px;
+	}
+	.qcphoto .left{
+		float: left;
+	}
+	.qcphoto .mid{
+		float: left;
+	}
+	.clear{
+		clear: both;
+	}
+	.qcphoto .left{
+		margin-right: 35px;
+	}
+	.qcphoto .mid{
+		margin-right: 35px;
+	}
+	.floor4{
+		background-color: bisque;
+	}
+	.floor4 .photo{
+		margin-top: 35px;
+		
+	}
+	.floor4 .photo>div{
+		display: inline-block;;
+		
+	}
+	.floor4 .photo:after{
+		content: "";
+		display: block;
+		clear: both;
+		width: 0;
+	}
+	.floor4 .photo .left{
+		margin-right: 10px;
+		
+	}
+	.floor4 .photo .m1{
+		margin-right: 10px;
+	}
+	.floor4 .photo .m2{
+		margin-right: 10px;
+	}
+	.floor4 .photo :last-child{
+		margin-right: 0!important;
+	}
+	.bitchphoto>div{
+		float: left;
+	}
+	.bitchphoto:after{
+		content: "";
+		display: block;
+		clear: both;
+		width: 0;
+	}
+	.bitchphoto .left{
+		margin-right: 13px;
+	}
+	.bitchphoto .ctr{
+		margin-right: 13px;
+	}
+	.bitchphoto .up{
+		margin-bottom: 13px;
+	}
+
+.box{
+	height: 150px;
+	width: 150px;
+	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	top: 20px;
+	left: 0;
+}
+.box ul li a{
+	font-size: 15px;
+	color: #7FFF00;
+}

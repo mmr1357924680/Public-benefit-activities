@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head">
+</head>
+<body>
+
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='joinAct')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>活动管理页面</span>
+        </div>
+
+        <form id="searchForm" th:action="@{/activitiesUser}" th:method="get">
+            <div class="search">
+                <!--            <span>请输入您要找的活动名称：</span>
+                            <input type="text" name="name" placeholder="请输入活动名称"/>
+                            <input type="button" value="查询" onclick="$('#searchForm').submit()"/>-->
+                <input id="currentPage" type="hidden" th:value="1" name="page"/>
+                <input type="hidden" th:value="5" name="rows"/>
+                <a th:href="@{/activity}" href="add.html">添加活动</a>
+            </div>
+        </form>
+        <table class="providerTable" cellpadding="0" cellspacing="0">
+            <tr class="firstTr">
+                <th width="10%">id</th>
+                <th width="10%">活动名称</th>
+                <th width="40%">活动内容</th>
+                <th width="40%">操作</th>
+            </tr>
+            <tr th:each="a : ${activity}">
+                <td th:text="${a.id}">id</td>
+                <td th:text="${a.name}">名称</td>
+                <td th:text="${a.content}">内容</td>
+                <td>
+                    <a th:href="@{/activity/} + ${a.id}" href="view.html"><img th:src="@{/img/read.png}" src="../img/read.png" alt="查看" title="查看"/></a>
+                </td>
+            </tr>
+        </table>
+        <!--分页div-->
+        <div style="width: 100%;text-align: center;">
+            <div id='page'></div>
+        </div>
+    </div>
+</section>
+
+
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<form method="post" id="deleteForm">
+    <input type="hidden" name="_method" value="delete">
+    <div class="remove" id="removeProv">
+        <div class="removerChid">
+            <h2>提示</h2>
+            <div class="removeMain" >
+                <p>你确定要删除吗？</p>
+                <a href="#" id="yes">确定</a>
+                <a href="#" id="no">取消</a>
+            </div>
+        </div>
+    </div>
+</form>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.js}" src="../js/jquery.js"></script>
+<script th:src="@{/js/js.js}" src="../js/js.js"></script>
+<script type="text/javascript" src="../js/initPage.js" ></script>
+<!--分页-->
+<script>
+    /*写一个ajax获取数据库记录数totalCount*/
+    pageUtil.initPage('page',{
+        totalCount:50,//总记录数，一般从回调函数中获取。如果没有数据则默认为1页
+        curPage:window.sessionStorage.getItem('pp'),//初始化时的默认选中页，默认第一页。如果所填范围溢出或者非数字或者数字字符串，则默认第一页
+        showCount:9,//分页栏显示的数量
+        pageSizeList:[5,10,15,20,25,30],//自定义分页数，默认[5,10,15,20,50]
+        defaultPageSize:5,//默认选中的分页数,默认选中第一个。如果未匹配到数组或者默认数组中，则也为第一个
+        isJump:true,//是否包含跳转功能，默认false
+        isPageNum:false,//是否显示分页下拉选择，默认false
+        isPN:false,//是否显示上一页和下一面，默认true
+        isFL:true,//是否显示首页和末页，默认true
+        jump:function(curPage,pageSize){//跳转功能回调，传递回来2个参数，当前页和每页大小。如果没有设置分页下拉，则第二个参数永远为0。这里的this被指定为一个空对象，如果回调中需用到this请自行使用bind方法
+            console.log(curPage,pageSize);
+            /*修改当前页，提交表单*/
+            $("#currentPage").val(curPage);
+            $('#searchForm').submit();
+            window.sessionStorage.setItem('pp',curPage);//设置当前页
+        },
+    });
+</script>
+</body>
+</html>

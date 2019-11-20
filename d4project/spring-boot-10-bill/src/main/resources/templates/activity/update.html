@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head">
+
+</head>
+<body>
+<script>
+    if([[${session.loginUser.userType}]]==2){
+        alert("抱歉，普通用户不能进入这个页面")
+        history.back(-1);
+    }
+</script>
+<script>
+    if([[${session.loginUser.userType}]]==2){
+        alert("抱歉，普通用户不能进入这个页面")
+        history.back(-1);
+    }
+</script>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='activity')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>活动管理页面 >> 活动信息修改页面</span>
+        </div>
+        <div class="providerAdd">
+            <form id="updateForm" action="#" th:action="@{/activity}" th:method="post">
+                <!--发送put请求修改信息-->
+
+                <!--1. 在SpringMVC中配置HiddenHttpMethodFilter（SpringBoot自动配置好了）-->
+                <!--2. 页面创建一个method="post"表单-->
+                <!--3. 创建一个input标签 name="_method"，value="指定请求方式"-->
+                <input th:type="hidden" name="_method" value="put">
+                <input th:type="hidden" name="id" th:value="${activity.id}">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div>
+                    <label for="name">活动主题：</label>
+                    <input type="text" th:value="${activity.name}" name="name" id="name" placeholder="输入活动主题"/>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label for="content">活动内容：</label>
+                    <textarea type="text" th:value="${activity.content}" name="content" id="content" placeholder="输入活动内容">[[${activity.content}]]</textarea>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label >审核状态 ：</label>
+                    <select name="state">
+                        <option name="state" value="0" th:selected="${activity.state == 0}">待审核</option>
+                        <option name="state" value="1" th:selected="${activity.state == 1}">已发布</option>
+                    </select>
+                </div>
+                <div class="providerAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="userList.html">返回</a>-->
+                    <input type="button" value="保存" onclick="$('#updateForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.js}" src="../js/jquery.js"></script>
+<!--
+	<script src="js/time.js"></script>
+	-->
+</body>
+</html>

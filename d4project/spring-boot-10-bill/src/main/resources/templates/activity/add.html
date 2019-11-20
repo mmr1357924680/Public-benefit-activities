@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head">
+
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.js}" src="../js/jquery.js"></script>
+    <!--
+        <script src="js/time.js"></script>
+        -->
+    <div class="left" th:replace="main/public :: #public_left(activeUri='activity')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>活动页面 >> 活动添加页面</span>
+        </div>
+        <div class="providerAdd">
+            <form id="addForm" th:action="@{/activity}" th:method="post" action="#">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div class="">
+                    <label for="name">活动名称：</label>
+                    <input type="text" name="name" id="name" required/>
+                    <span>*请输入活动名称，不能重复</span>
+                </div>
+                <div>
+                    <label for="content">活动内容：</label>
+                    <textarea type="text" name="content" id="content" required></textarea>
+                    <span >*请输入活动详细内容（不要超过510个字）</span>
+                </div>
+                <div class="providerAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="userList.html">返回</a>-->
+                    <input type="button" id="save" value="发布活动" onclick="$('#addForm').submit()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+    $(function(){
+        $('#addForm').submit(function(){
+            alert("上传活动成功，通过审核将获得5积分")
+        });
+    })
+</script>
+
+</body>
+</html>

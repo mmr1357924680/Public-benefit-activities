@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head">
+
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='activity')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>活动管理页面 >> 活动详情查看页面</span>
+        </div>
+        <div class="providerView">
+            <strong><span th:text="${activity.name}">hanlu</span></strong>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${activity.content}">hanlu</span></p>
+            <a id="joinAct" th:href="@{/joinActivity?id=} + ${activity.id}">参加活动</a>
+            <a onclick="history.back(-1)" href="#">返回</a>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.js}" src="../js/jquery.js"></script>
+<script>
+    $(function(){
+        $('#joinAct').click(function(){
+            alert("您参加该活动，获得1积分，请自觉写1000参后感！！！！！！！");
+        });
+    })
+</script>
+</body>
+</html>

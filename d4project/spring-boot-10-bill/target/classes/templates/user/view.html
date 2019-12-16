@@ -4,7 +4,12 @@
 
 </head>
 <body>
-
+<script>
+    if([[${session.loginUser.userType}]]==1){//管理员的个人主页多一个前往编辑活动logo的按钮
+        var goToEditLogo = document.createElement('div')
+        document.getElementById('main').appendChild(goToEditLogo);
+   }
+</script>
 <!--头部-->
 <header class="publicHeader" th:replace="main/public :: #public_header">
 
@@ -22,7 +27,7 @@
             <strong>你现在所在的位置是:</strong>
             <span>用户管理页面 >> 用户信息查看页面</span>
         </div>
-        <div class="providerView">
+        <div id="main" class="providerView">
             <p><strong>用户名：</strong><span th:text="${user.username}">hanlu</span></p>
             <p><strong>真实姓名：</strong><span th:text="${user.realName}">韩露</span></p>
             <p><strong>用户性别：</strong><span th:text="${user.gender == 1 ? '女' : '男'}">女</span></p>

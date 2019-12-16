@@ -75,4 +75,9 @@
             #{id}
         </foreach>
     </select>-->
+    <select id="statistics" resultType="com.mengxuegu.springboot.entities.Statistics">
+        select (select count(*)/(select count(*) from activity) as passRatio from activity where state = 1) as passRatio,(select (select count(DISTINCT aid) from join_activity)/(select count(*) from join_activity) as actAvg
+        ) as actAvg, (select (select count(*) from join_activity where comments != null || comments !='')/(select count(*) from join_activity) as actAvgComment
+        ) as actAvgComment
+    </select>
 </mapper>

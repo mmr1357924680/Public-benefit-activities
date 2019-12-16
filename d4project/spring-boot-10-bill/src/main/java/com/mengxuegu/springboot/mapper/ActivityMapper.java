@@ -4,6 +4,7 @@ import com.mengxuegu.springboot.common.Pager;
 import com.mengxuegu.springboot.entities.Activity;
 import com.mengxuegu.springboot.entities.CreateActivity;
 import com.mengxuegu.springboot.entities.JoinActivity;
+import com.mengxuegu.springboot.entities.Statistics;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,6 +27,8 @@ public interface ActivityMapper {
     int getUserIdByActId(Integer id);
 
     void addJoinRelation(JoinActivity joinActivity);
+
+    Statistics statistics();
 
 /*    List<String> getNamesByCreateIds(@Param("list") List<Integer> createIds);
 

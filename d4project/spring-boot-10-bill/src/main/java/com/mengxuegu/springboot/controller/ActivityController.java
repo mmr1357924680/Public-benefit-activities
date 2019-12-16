@@ -1,10 +1,7 @@
 package com.mengxuegu.springboot.controller;
 
 import com.mengxuegu.springboot.common.Pager;
-import com.mengxuegu.springboot.entities.Activity;
-import com.mengxuegu.springboot.entities.CreateActivity;
-import com.mengxuegu.springboot.entities.JoinActivity;
-import com.mengxuegu.springboot.entities.User;
+import com.mengxuegu.springboot.entities.*;
 import com.mengxuegu.springboot.mapper.ActivityMapper;
 import com.mengxuegu.springboot.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -36,6 +33,19 @@ public class ActivityController {
         map.put("activity",lists);
 
         return "activity/list";
+    }
+    @GetMapping("/statistics")
+    public String statistics(Map<String, Object> map){//返回活动信息统计信息
+        logger.info("返回活动统计信息。。。");
+        Statistics statistics = activityMapper.statistics();
+        map.put("statistics",statistics);
+        statistics.setPassRatio(statistics.getPassRatio()*100);
+        statistics.setActAvg(statistics.getActAvg()*100);
+        statistics.setActAvgComment(statistics.getActAvgComment()*100);
+        logger.info("审核通过率"+Double.toString(statistics.getPassRatio()));
+        logger.info("活动平均参加人数比例"+Double.toString(statistics.getActAvg()));
+        logger.info("活动平均评论人数比例"+Double.toString(statistics.getActAvgComment()));
+        return "activity/statistics";
     }
     @GetMapping("/activitiesUser")//普通用户查看活动列表
     public String listN(Map<String, Object> map, String name, Pager<Activity> pager){//传入活动名称,查这个活动

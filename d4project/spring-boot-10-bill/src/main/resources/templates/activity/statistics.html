@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head">
+</head>
+<body>
+<script>
+    if([[${session.loginUser.userType}]]==2&&[[${session.loginUser.userPoint}]]<50){
+        alert("抱歉，普通用户不能进入这个页面")
+        history.back(-1);
+    }
+</script>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='statistics')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>活动管理页面 >> 活动信息统计</span>
+        </div>
+        <div class="providerAdd">
+            <form id="updateForm" action="#" th:action="@{/statistics}" th:method="post">
+                <div>
+                    审核通过率：<div type="text" th:text="${statistics.getPassRatio()}+'%'" name="passRatio" id="passRatio"/></div>
+                    活动平均参加人数：<div type="text" th:text="${statistics.getActAvg()+'%'}" name="actAvg" id="actAvg"></div>
+                    活动平均评论人数：<div type="text" th:text="${statistics.getActAvgComment()+'%'}" name="actAvgComment" id="actAvgComment"></div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.js}" src="../js/jquery.js">
+</script>
+
+</body>
+</html>

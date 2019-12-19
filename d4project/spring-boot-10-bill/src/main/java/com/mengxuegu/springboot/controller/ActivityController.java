@@ -26,12 +26,12 @@ public class ActivityController {
     @Autowired
     UserMapper userMapper;
 
+
     @GetMapping("/activities")
     public String list(Map<String, Object> map, String name, Pager<Activity> pager){//传入活动名称,查这个活动
         logger.info("活动查询。。。" + name);
         List<Activity> lists = activityMapper.getActivityByPage(pager);
         map.put("activity",lists);
-
         return "activity/list";
     }
     @GetMapping("/statistics")
@@ -46,6 +46,15 @@ public class ActivityController {
         logger.info("活动平均参加人数比例"+Double.toString(statistics.getActAvg()));
         logger.info("活动平均评论人数比例"+Double.toString(statistics.getActAvgComment()));
         return "activity/statistics";
+    }
+    //管理员前往编辑前台logo页面
+    @GetMapping("/editLogoView")
+    public String editLogoView(Map<String, Object> map,Pager<Logo> pager){
+        logger.info("前往logo编辑页面");
+        List<Logo> lists = activityMapper.getLogoView(pager);
+        logger.info("logo>>>>>>>>>>>>"+lists);
+        map.put("logo",lists);
+        return "activity/showBackSide";
     }
     @GetMapping("/activitiesUser")//普通用户查看活动列表
     public String listN(Map<String, Object> map, String name, Pager<Activity> pager){//传入活动名称,查这个活动
@@ -136,4 +145,5 @@ public class ActivityController {
         activityMapper.addJoinRelation(joinActivity);
         return "redirect:/activitiesUser";
     }
+
 }

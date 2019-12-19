@@ -37,4 +37,13 @@ public class Statistics {
     public void setActAvgComment(double actAvgComment) {
         this.actAvgComment = actAvgComment;
     }
+
+    @Override
+    public String toString() {
+        return "Statistics{" +
+                "passRatio=" + passRatio +
+                ", actAvg=" + actAvg +
+                ", actAvgComment=" + actAvgComment +
+                '}';
+    }
 }

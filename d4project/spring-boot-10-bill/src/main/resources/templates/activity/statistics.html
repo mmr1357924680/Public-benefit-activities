@@ -4,8 +4,8 @@
 </head>
 <body>
 <script>
-    if([[${session.loginUser.userType}]]==2&&[[${session.loginUser.userPoint}]]<50){
-        alert("抱歉，普通用户不能进入这个页面")
+    if([[${session.loginUser.userType}]]==2){
+        alert("抱歉，只有管理员可以访问这个页面")
         history.back(-1);
     }
 </script>
@@ -30,13 +30,16 @@
             <form id="updateForm" action="#" th:action="@{/statistics}" th:method="post">
                 <div>
                     审核通过率：<div type="text" th:text="${statistics.getPassRatio()}+'%'" name="passRatio" id="passRatio"/></div>
-                    活动平均参加人数：<div type="text" th:text="${statistics.getActAvg()+'%'}" name="actAvg" id="actAvg"></div>
-                    活动平均评论人数：<div type="text" th:text="${statistics.getActAvgComment()+'%'}" name="actAvgComment" id="actAvgComment"></div>
+                    活动参加率：<div type="text" th:text="${statistics.getActAvg()+'%'}" name="actAvg" id="actAvg"></div>
+                    活动评论率：<div type="text" th:text="${statistics.getActAvgComment()+'%'}" name="actAvgComment" id="actAvgComment"></div>
                 </div>
+        <div class="publicHeaderR">
+            <a th:href="@{/editLogoView}" href="../activity/showBackSide.html">编辑主页</a>
+        </div>
             </form>
         </div>
-
     </div>
+
 </section>
 <footer class="footer" th:replace="main/public :: #public_footer">
 </footer>

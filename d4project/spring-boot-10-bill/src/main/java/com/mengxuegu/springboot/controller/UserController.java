@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * 供应商的控制层
- * @Auther: 梦学谷
+ * @Auther: mmr
  */
 @Controller
 @Transactional

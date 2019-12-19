@@ -80,4 +80,12 @@
         ) as actAvg, (select (select count(*) from join_activity where comments != null || comments !='')/(select count(*) from join_activity) as actAvgComment
         ) as actAvgComment
     </select>
+
+    <!--显示logo页面-->
+    <select id="getLogoView" resultType="com.mengxuegu.springboot.entities.Logo">
+        <!--分页时运算处理-->
+        <bind name="offset" value="(entity.page-1)*entity.rows"/>
+        SELECT id,picture_link,show_status FROM `logo`
+          limit #{offset},#{entity.rows}
+    </select>
 </mapper>

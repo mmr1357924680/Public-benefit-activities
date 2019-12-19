@@ -1,10 +1,7 @@
 package com.mengxuegu.springboot.mapper;
 
 import com.mengxuegu.springboot.common.Pager;
-import com.mengxuegu.springboot.entities.Activity;
-import com.mengxuegu.springboot.entities.CreateActivity;
-import com.mengxuegu.springboot.entities.JoinActivity;
-import com.mengxuegu.springboot.entities.Statistics;
+import com.mengxuegu.springboot.entities.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,6 +26,8 @@ public interface ActivityMapper {
     void addJoinRelation(JoinActivity joinActivity);
 
     Statistics statistics();
+
+    List<Logo> getLogoView(@Param("entity") Pager<Logo> pager);
 
 /*    List<String> getNamesByCreateIds(@Param("list") List<Integer> createIds);
 

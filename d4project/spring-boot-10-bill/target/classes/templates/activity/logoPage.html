@@ -2,13 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en" th:replace="main/public :: #public_head">
 </head>
-<body>
-<script>
-    if([[${session.loginUser.userType}]]==2){
-        alert("抱歉，只有管理员可以访问这个页面")
-        history.back(-1);
-    }
-</script>
+<body onload="init()">
+
 <!--头部-->
 <header class="publicHeader" th:replace="main/public :: #public_header">
 
@@ -19,7 +14,7 @@
 </section>
 <!--主体内容-->
 <section class="publicMian ">
-    <div class="left" th:replace="main/public :: #public_left(activeUri='statistics')">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='logoPage')">
     </div>
     <div class="right">
         <div class="location">
@@ -32,11 +27,15 @@
                 <th width="60%">活动缩略图</th>
                 <th width="20%">是否展示</th>
             </tr>
-            <tr th:each="l : ${logo}">
+            <tr th:each="l : ${logos}">
                 <td th:text="${l.id}">id</td>
                 <td><img th:src="${l.pictureLink}" /></td>
                 <td th:text="${l.showStatus == 1  ? '展示中':'不展示'}">内容</td>
+
             </tr>
+            <div >
+               <img id="lunbotu"src="img/logo/1.jpg" width="100%" height="300px" >
+            </div>
         </table>
     </div>
 
@@ -44,6 +43,20 @@
 <footer class="footer" th:replace="main/public :: #public_footer">
 </footer>
 <script th:src="@{/webjars/jquery/3.3.1/jquery.js}" src="../js/jquery.js">
+</script>
+<script>
+
+    function init(){
+        setInterval("changeImg()",3000);
+    }
+    var i=1;
+    function changeImg(){
+        i++;
+        document.getElementById("lunbotu").src="img/logo/"+i+".jpg";
+        if(i==3){
+            i=0;
+        }
+    }
 </script>
 
 </body>

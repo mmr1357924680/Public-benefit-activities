@@ -32,7 +32,7 @@
         <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
         <nav>
             <ul class="list">
-                <li><a href="html/index.html">活动展示</a></li>
+                <li th:id="${activeUri == 'logoPage' ? 'active': ''}" ><a th:href="@{/toLogoPage}" href="../activity/logoPage.html">活动展示</a></li>
                 <li th:id="${activeUri == 'statistics' ? 'active': ''}" ><a th:href="@{/statistics}" href="../activity/statistics.html">活动信息统计</a></li>
                 <li th:id="${activeUri == 'userPage' ? 'active': ''}" ><a th:href="@{/user/} + ${session.loginUser.id}" href="../activity/list.html">个人信息</a></li>
                 <li th:id="${activeUri == 'joinAct' ? 'active': ''}" ><a th:href="@{/activitiesUser}" href="../activity/list.html">参加或发布活动</a></li>

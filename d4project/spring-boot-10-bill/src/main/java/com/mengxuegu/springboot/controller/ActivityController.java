@@ -27,6 +27,13 @@ public class ActivityController {
     UserMapper userMapper;
 
 
+    @GetMapping("/toLogoPage")
+    public String toLogoPage(Map<String, Object> map,Pager<Logo> pager){
+        logger.info("活动LOGO展示页面。。。" );
+        List<Logo> lists = activityMapper.getLogoView(pager);
+        map.put("logos",lists);
+        return "activity/logoPage";
+    }
     @GetMapping("/activities")
     public String list(Map<String, Object> map, String name, Pager<Activity> pager){//传入活动名称,查这个活动
         logger.info("活动查询。。。" + name);

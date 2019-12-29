@@ -29,6 +29,16 @@ public interface ActivityMapper {
 
     List<Logo> getLogoView(@Param("entity") Pager<Logo> pager);
 
+    List<JoinActivity> getJoinActivityLists(Integer id);//通过活动id找评论者的评论，连表找评论者的姓名
+
+    List<JoinActivity> getJoinActivityWaitSureList();//得到未通过审核的用户参加活动申请
+
+    void addPointByUid(User user);//通过用户id给对应用户增加1积分
+
+    void passJoin(JoinActivity joinActivity);//对应关联表状态设为1
+
+    List<Logo> getShowLogoView(@Param("entity") Pager<Logo> pager);
+
 /*    List<String> getNamesByCreateIds(@Param("list") List<Integer> createIds);
 
     List<String> getNamesByJoiniIds(@Param("list") List<Integer> joinIds);*/

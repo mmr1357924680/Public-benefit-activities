@@ -19,24 +19,19 @@
     <div class="right">
         <div class="location">
             <strong>你现在所在的位置是:</strong>
-            <span>活动管理页面 >> 活动信息统计</span>
+            <span>活动logo展示页面</span>
         </div>
+
+
         <table class="providerTable" cellpadding="0" cellspacing="0">
-            <tr class="firstTr">
-                <th width="20%">id</th>
-                <th width="60%">活动缩略图</th>
-                <th width="20%">是否展示</th>
-            </tr>
+
             <tr th:each="l : ${logos}">
-                <td th:text="${l.id}">id</td>
-                <td><img th:src="${l.pictureLink}" /></td>
-                <td th:text="${l.showStatus == 1  ? '展示中':'不展示'}">内容</td>
+                <!--<td th:text="${l.pictureLink}">用户</td>-->
+                <td> <img id="lunbotu" th:src="${l.pictureLink}" width="100%" height="100%" ><td/>
 
             </tr>
-            <div >
-               <img id="lunbotu"src="img/logo/1.jpg" width="100%" height="300px" >
-            </div>
         </table>
+
     </div>
 
 </section>
@@ -46,17 +41,17 @@
 </script>
 <script>
 
-    function init(){
-        setInterval("changeImg()",3000);
-    }
-    var i=1;
-    function changeImg(){
-        i++;
-        document.getElementById("lunbotu").src="img/logo/"+i+".jpg";
-        if(i==3){
-            i=0;
-        }
-    }
+    // function init(){
+    //     setInterval("changeImg()",3000);
+    // }
+    // var i=1;
+    // function changeImg(){
+    //     i++;
+    //     document.getElementById("lunbotu").src="img/logo/"+i+".jpg";
+    //     if(i==3){
+    //         i=0;
+    //     }
+    // }
 </script>
 
 </body>

@@ -52,7 +52,9 @@
                     <label >审核状态 ：</label>
                     <select name="state">
                         <option name="state" value="0" th:selected="${activity.state == 0}">待审核</option>
-                        <option name="state" value="1" th:selected="${activity.state == 1}">已发布</option>
+                        <option name="state" value="1" th:selected="${activity.state == 1}">已审核未开始</option>
+                        <option name="state" value="2" th:selected="${activity.state == 2}">进行中</option>
+                        <option name="state" value="3" th:selected="${activity.state == 3}">已结束</option>
                     </select>
                 </div>
                 <div class="providerAddBtn">

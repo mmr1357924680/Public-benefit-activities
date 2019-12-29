@@ -61,7 +61,7 @@
         SELECT uid FROM create_activity WHERE aid = #{id}
     </select>
     <insert id="addJoinRelation" parameterType="com.mengxuegu.springboot.entities.JoinActivity">
-        INSERT INTO join_activity(uid,aid) VALUES (#{uid},#{aid})
+        INSERT INTO join_activity(uid,aid,comments) VALUES (#{uid},#{aid},#{comments})
     </insert>
 <!--    <select id="getNamesByCreateIds" resultType="string">
         SELECT name FROM activity WHERE id in
@@ -76,7 +76,7 @@
         </foreach>
     </select>-->
     <select id="statistics" resultType="com.mengxuegu.springboot.entities.Statistics">
-        select (select count(*)/(select count(*) from activity) as passRatio from activity where state = 1) as passRatio,(select (select count(DISTINCT aid) from join_activity)/(select count(*) from join_activity) as actAvg
+        select (select count(*)/(select count(*) from activity) as passRatio from activity where state != 0) as passRatio,(select (select count(DISTINCT aid) from join_activity)/(select count(*) from join_activity) as actAvg
         ) as actAvg, (select (select count(*) from join_activity where comments != null || comments !='')/(select count(*) from join_activity) as actAvgComment
         ) as actAvgComment
     </select>
@@ -88,4 +88,27 @@
         SELECT id,picture_link,show_status FROM `logo`
           limit #{offset},#{entity.rows}
     </select>
+    <!--展示中的logo图片-->
+    <select id="getShowLogoView" resultType="com.mengxuegu.springboot.entities.Logo">
+        <!--分页时运算处理-->
+        <bind name="offset" value="(entity.page-1)*entity.rows"/>
+        SELECT id,picture_link,show_status FROM `logo` where show_status = 1
+        limit #{offset},#{entity.rows}
+    </select>
+    <!--传入活动id，返回参加这个活动的人的评论，姓名等信息-->
+    <select id="getJoinActivityLists" resultType="com.mengxuegu.springboot.entities.JoinActivity">
+        select `user`.id,uid,aid,comments,username from join_activity,`user` where aid = #{id} and uid = `user`.id
+    </select>
+
+    <!--得到未通过审核的参加活动申请-->
+    <select id="getJoinActivityWaitSureList" resultType="com.mengxuegu.springboot.entities.JoinActivity">
+        select activity.id as aid, `user`.id as uid, activity.name as activityName,username from join_activity,`user`,activity where join_activity.state = 0 and join_activity.uid = `user`.id and join_activity.aid = activity.id
+    </select>
+    <!--通过用户id增加积分-->
+    <update id="addPointByUid" parameterType="com.mengxuegu.springboot.entities.User">
+        update user set user_point = user_point + 1 where id = #{id}
+    </update>
+    <update id="passJoin" parameterType="com.mengxuegu.springboot.entities.JoinActivity">
+        update join_activity set state = 1 where aid = #{aid} and uid = #{uid}
+    </update>
 </mapper>

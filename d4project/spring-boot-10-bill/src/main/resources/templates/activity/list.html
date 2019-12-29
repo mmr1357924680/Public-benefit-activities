@@ -48,7 +48,7 @@
                 <td th:text="${a.id}">id</td>
                 <td th:text="${a.name}">名称</td>
                 <td th:text="${a.content}">内容</td>
-                <td th:text="${a.state==1 ? '已发布':'待审核'}">状态</td>
+                <td th:text="${a.state==0 ? '待审核':a.state==1 ? '已审核未开始':a.state==2 ? '进行中':a.state==3 ? '已结束': '已结束'}">状态</td>
                 <td>
                     <a th:href="@{/activity/} + ${a.id}" href="view.html"><img th:src="@{/img/read.png}" src="../img/read.png" alt="查看" title="查看"/></a>
                     <a th:href="@{/activity/} + ${a.id} +'?type=update'" href="update.html"><img th:src="@{/img/xiugai.png}"  src="../img/xiugai.png" alt="修改" title="修改"/></a>

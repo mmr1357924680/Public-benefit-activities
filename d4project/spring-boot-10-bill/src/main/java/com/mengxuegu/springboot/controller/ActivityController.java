@@ -30,7 +30,7 @@ public class ActivityController {
     @GetMapping("/toLogoPage")
     public String toLogoPage(Map<String, Object> map,Pager<Logo> pager){
         logger.info("活动LOGO展示页面。。。" );
-        List<Logo> lists = activityMapper.getLogoView(pager);
+        List<Logo> lists = activityMapper.getShowLogoView(pager);
         map.put("logos",lists);
         return "activity/logoPage";
     }
@@ -52,6 +52,13 @@ public class ActivityController {
         logger.info("审核通过率"+Double.toString(statistics.getPassRatio()));
         logger.info("活动平均参加人数比例"+Double.toString(statistics.getActAvg()));
         logger.info("活动平均评论人数比例"+Double.toString(statistics.getActAvgComment()));
+
+        //在统计页面，显示用户提交参加申请，还未通过，需要管理员确认的列表
+        List<JoinActivity> joinActivityWaitSureList = activityMapper.getJoinActivityWaitSureList();
+        logger.info("记录"+joinActivityWaitSureList);
+        map.put("joinActivityWaitSureList",joinActivityWaitSureList);
+
+        logger.info("返回。。。");
         return "activity/statistics";
     }
     //管理员前往编辑前台logo页面
@@ -63,6 +70,7 @@ public class ActivityController {
         map.put("logo",lists);
         return "activity/showBackSide";
     }
+
     @GetMapping("/activitiesUser")//普通用户查看活动列表
     public String listN(Map<String, Object> map, String name, Pager<Activity> pager){//传入活动名称,查这个活动
         logger.info("活动查询(普通用户)。。。" + name);
@@ -83,7 +91,11 @@ public class ActivityController {
 
         Activity activity = activityMapper.getActivityById(id);
 
+        List<JoinActivity> joinActivities = activityMapper.getJoinActivityLists(id);
+
         map.put("activity", activity);
+
+        map.put("joinActivities",joinActivities);
 
         // type = null 则进入view.html， type=update 则是进入update.html
         return "activity/" + type;
@@ -140,16 +152,32 @@ public class ActivityController {
 
         return "redirect:/activities";
     }
-    //参加活动（加1积分）
+    //用户提交参加活动申请
     @GetMapping("joinActivity")
-    public String joinActivity(Activity activity,HttpServletRequest request){
+    public String joinActivity(JoinActivity jActivity,HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("loginUser");
-        userMapper.addOnePoint(user.getId());
         //关联表增加参加活动关系
         JoinActivity joinActivity = new JoinActivity();
         joinActivity.setUid(user.getId());
-        joinActivity.setAid(activity.getId());
+        joinActivity.setAid(jActivity.getAid());
+        joinActivity.setComments(jActivity.getComments());
         activityMapper.addJoinRelation(joinActivity);
+        return "redirect:/activitiesUser";
+    }
+
+    //管理员通过参加活动的申请（加1积分）
+    @GetMapping("passJoinActivity")
+    public String passJoinActivity( Integer uid, Integer aid){
+        //管理员通过参加活动的申请（加1积分）
+        logger.info("增加1积分");
+        User user = new User();
+        user.setId(uid);
+        activityMapper.addPointByUid(user);
+        //通过申请，join_activity关联表state变成1
+       JoinActivity joinActivity = new JoinActivity();
+       joinActivity.setAid(aid);
+       joinActivity.setUid(uid);
+       activityMapper.passJoin(joinActivity);
         return "redirect:/activitiesUser";
     }
 

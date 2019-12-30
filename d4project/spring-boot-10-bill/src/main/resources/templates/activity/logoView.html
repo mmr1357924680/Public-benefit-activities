@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="main/public :: #public_head">
+
+</head>
+<body>
+<!--头部-->
+<header class="publicHeader" th:replace="main/public :: #public_header">
+
+</header>
+<!--时间-->
+<section class="publicTime" th:replace="main/public :: #public_time">
+
+</section>
+<!--主体内容-->
+<section class="publicMian ">
+    <div class="left" th:replace="main/public :: #public_left(activeUri='joinAct')">
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>活动管理页面 >> 活动信息统计 >> 活动logo后台编辑页面 >> 修改主页展示图片</span>
+        </div>
+
+
+            <form id="updateForm" th:action="@{/editMainView}" th:method="post">
+
+                        <input name="id" type="hidden" th:value="${logoView.id}">
+                        <img th:src="${logoView.pictureLink}" />
+
+                        <select name="showStatus">
+                            <option name="showStatus" value="1" th:selected="${logoView.showStatus == 1}">展示</option>
+                            <option name="showStatus" value="2" th:selected="${logoView.showStatus == 2}">不展示</option>
+                        </select>
+
+
+                        <input type="button" value="确定" onclick="$('#updateForm').submit()"/>
+
+
+            </form>
+
+
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #public_footer">
+</footer>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.js}" src="../js/jquery.js"></script>
+<script>
+
+    $(function(){
+        $('#joinAct').click(function(){
+            alert("您参加该活动，等管理员确认后可获得1积分");
+        });
+    })
+</script>
+</body>
+</html>

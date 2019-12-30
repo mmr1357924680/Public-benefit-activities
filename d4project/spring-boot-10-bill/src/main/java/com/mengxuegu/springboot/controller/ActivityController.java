@@ -26,7 +26,24 @@ public class ActivityController {
     @Autowired
     UserMapper userMapper;
 
+    @PostMapping("/editMainView")
+    public String editMainView(Logo logo) {
+        logger.info("修改主页展示图片");
+        activityMapper.editMainView(logo);
+        return "activity/logoPage";
+    }
+    @GetMapping("/logoView/{id}")
+    public String logoView(@PathVariable("id") Integer id,
+                       @RequestParam(value="type", defaultValue = "view") String type,
+                       Map<String, Object> map) {
+        logger.info("查询主页展示图片" + id + "的详细信息");
 
+        Logo logoView = activityMapper.logoView(id);
+
+        map.put("logoView", logoView);
+
+        return "activity/logoView";
+    }
     @GetMapping("/toLogoPage")
     public String toLogoPage(Map<String, Object> map,Pager<Logo> pager){
         logger.info("活动LOGO展示页面。。。" );

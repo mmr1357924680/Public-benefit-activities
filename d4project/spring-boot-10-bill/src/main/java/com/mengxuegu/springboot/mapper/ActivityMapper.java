@@ -39,6 +39,10 @@ public interface ActivityMapper {
 
     List<Logo> getShowLogoView(@Param("entity") Pager<Logo> pager);
 
+    Logo logoView(Integer id);
+
+    void editMainView(Logo logo);
+
 /*    List<String> getNamesByCreateIds(@Param("list") List<Integer> createIds);
 
     List<String> getNamesByJoiniIds(@Param("list") List<Integer> joinIds);*/

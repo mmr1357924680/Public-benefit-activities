@@ -111,4 +111,10 @@
     <update id="passJoin" parameterType="com.mengxuegu.springboot.entities.JoinActivity">
         update join_activity set state = 1 where aid = #{aid} and uid = #{uid}
     </update>
+    <select id="logoView" resultType="com.mengxuegu.springboot.entities.Logo">
+        select * from logo where id = #{id}
+    </select>
+    <update id="editMainView" parameterType="com.mengxuegu.springboot.entities.Logo">
+        update logo set show_status = #{showStatus} where id = #{id}
+    </update>
 </mapper>

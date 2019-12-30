@@ -29,7 +29,7 @@
         <div class="providerAdd">
             <form id="updateForm" action="#" th:action="@{/statistics}" th:method="post">
                 <div>
-                    审核通过率：<div type="text" th:text="${statistics.getPassRatio()}+'%'" name="passRatio" id="passRatio"/></div>
+                    活动通过率：<div type="text" th:text="${statistics.getPassRatio()}+'%'" name="passRatio" id="passRatio"/></div>
                     活动参加率：<div type="text" th:text="${statistics.getActAvg()+'%'}" name="actAvg" id="actAvg"></div>
                     活动评论率：<div type="text" th:text="${statistics.getActAvgComment()+'%'}" name="actAvgComment" id="actAvgComment"></div>
                 </div>

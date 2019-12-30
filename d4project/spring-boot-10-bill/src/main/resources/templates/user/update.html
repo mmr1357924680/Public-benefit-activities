@@ -48,7 +48,7 @@
 
                 <div>
                     <label >用户性别：</label>
-
+                    <!--下拉选择框-->
                     <select name="gender">
                         <option value="1" th:selected="${user.gender == 1}">女</option>
                         <option value="2" th:selected="${user.gender == 2}" selected>男</option>
@@ -62,6 +62,7 @@
                 <div>
                     <label >用户类别：</label>
                     <!--1管理员  2经理  3普通用户-->
+                    <!--单选框-->
                     <input type="radio" name="userType" value="1" th:checked="${user.userType == 1}"/>管理员
                     <input type="radio" name="userType" value="3" th:checked="${user.userType == 2}"/>普通用户
                 </div>

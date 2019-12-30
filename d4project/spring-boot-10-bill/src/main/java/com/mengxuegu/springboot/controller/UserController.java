@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 供应商的控制层
+ * 用户控制层
  * @Auther: mmr
  */
 @Controller
@@ -69,7 +69,7 @@ public class UserController {
         return "user/" + type;
     }
 
-    //修改供应商信息
+    //修改信息
     @PutMapping("/user")
     public String update(User user) {
         logger.info("更改信息。。。");

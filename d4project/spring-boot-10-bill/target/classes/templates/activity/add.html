@@ -4,6 +4,12 @@
 
 </head>
 <body>
+<script>
+    if([[${session.loginUser.userType}]]==2&&[[${session.loginUser.userPoint<50}]]){
+        alert("抱歉，只有管理员或者积分达到50的用户这个页面")
+        history.back(-1);
+    }
+</script>
 <!--头部-->
 <header class="publicHeader" th:replace="main/public :: #public_header">
 
